@@ -14,7 +14,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('blog.index');
+        $blogs = Blog::orderBy('id')->get();
+        return view('blog.index', compact('blogs'));
     }
 
     /**
@@ -24,7 +25,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.create');
     }
 
     /**
@@ -35,7 +36,19 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $this->validate($request,[
+          'judul' => 'min:5',
+          'deskripsi' => 'min:10'
+        ]);
+
+        Blog::create([
+          'judul' => $request->judul,
+          'kategori' => $request->kategori,
+          'deskripsi' => $request->deskripsi
+        ]);
+
+        return redirect()->route('blog')->with('success','Blog berhasil di tambhakan');
     }
 
     /**
@@ -46,7 +59,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        return view('blog.show', compact('$blog'));
     }
 
     /**
@@ -57,7 +70,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return view('blog.edit', compact('blog'));
     }
 
     /**
@@ -69,7 +82,14 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        $blog->update([
+          'judul' => $request->judul,
+          'kategori' => $request->kategori,
+          'deskripsi' => $request->deskripsi
+        ]);
+
+        return redirect()->route('blog')->with('success','Blog berhasil diubah');
+
     }
 
     /**
@@ -80,6 +100,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return redirect()->route('blog')->with('success','Blog berhasil dihapus');
     }
 }

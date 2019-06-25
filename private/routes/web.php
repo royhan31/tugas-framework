@@ -18,4 +18,10 @@ Route::get('/', function () {
 //route untuk Blog
 Route::group(['prefix' => 'blog'], function(){
   Route::get('/','BlogController@index')->name('blog');
+  Route::get('/tambah','BlogController@create')->name('blog.create');
+  Route::post('/tambah','BlogController@store')->name('blog.store');
+  Route::get('/detail/{blog}','BlogController@show')->name('blog.show');
+  Route::get('/edit/{blog}','BlogController@edit')->name('blog.edit');
+  Route::put('/edit/{blog}','BlogController@update')->name('blog.update');
+  Route::delete('/hapus/{blog}','BlogController@destroy')->name('blog.delete');
 });

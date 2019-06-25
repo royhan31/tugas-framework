@@ -44,7 +44,7 @@
                             <a class="nav-link" href="">User</a>
                         </li>
                         <li class="nav-item
-                        @if(Request::is('blog') || Request::is('blog/tambah'))
+                        @if(Request::is('blog') || Request::is('blog/tambah') || Request::is('blog/detail/*') || Request::is('blog/edit/*') )
                         active
                         @endif
                         ">
