@@ -20,12 +20,15 @@
   @else
   <div class="row">
     @foreach($blogs as $blog)
-    <div class="col-4">
-      <div class="card">
+    <div class="col-4 mb-3">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{asset('public/images/'.$blog->foto)}}" alt="Tidak ada gambar">
         <div class="card-body">
-          <h5 class="card-title"><a href="{{route('blog.show', $blog)}}">{{$blog->judul}}</a></h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{$blog->kategori}}</h6>
-          <p>{{str_limit($blog->deskripsi, 20)}}</p>
+          <h3 class="card-title"><a href="{{route('blog.show', $blog)}}">{{$blog->judul}}</a></h3>
+          <p>{{str_limit($blog->isi_berita, 80)}}</p>
+          <div class="text-right">
+            <a href="{{route('blog.show', $blog)}}">Lihat Selengkapnya</a>
+          </div>
         </div>
         <div class="card-footer text-right">
           <button type="button" onclick="window.location='{{route("blog.edit", $blog)}}'" class="btn btn-warning" name="button">Edit</button>
@@ -33,7 +36,6 @@
         </div>
       </div>
     </div>
-  </div>
   <!-- Modal Hapus -->
   <div class="modal fade" id="hapus{{$blog->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -59,6 +61,7 @@
 </div>
   @endforeach
   @endif
+</div>
 </div>
 
 @endsection

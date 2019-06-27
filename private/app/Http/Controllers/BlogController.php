@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use Illuminate\Http\Request;
-
+use Storage;
 class BlogController extends Controller
 {
     /**
@@ -36,16 +36,16 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $this->validate($request,[
           'judul' => 'min:5',
-          'deskripsi' => 'min:10'
+          'isi_berita' => 'min:10'
         ]);
+        $foto = $request->file('foto')->store('blog');
 
         Blog::create([
           'judul' => $request->judul,
-          'kategori' => $request->kategori,
-          'deskripsi' => $request->deskripsi
+          'isi_berita' => $request->isi_berita,
+          'foto' => $foto
         ]);
 
         return redirect()->route('blog')->with('success','Blog berhasil di tambhakan');
@@ -59,7 +59,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        return view('blog.show', compact('$blog'));
+        return view('blog.show', compact('blog'));
     }
 
     /**
@@ -82,11 +82,25 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+      if ($request->foto) {
+        $foto_path = $blog->foto;
+        if (Storage::exists($foto_path)) {
+          Storage::delete($foto_path);
+        }
+        $foto = $request->file('foto')->store('blog');
         $blog->update([
           'judul' => $request->judul,
-          'kategori' => $request->kategori,
-          'deskripsi' => $request->deskripsi
+          'isi_berita' => $request->isi_berita,
+          'foto' => $foto
         ]);
+
+      }else {
+        $blog->update([
+          'judul' => $request->judul,
+          'isi_berita' => $request->isi_berita,
+        ]);
+
+      }
 
         return redirect()->route('blog')->with('success','Blog berhasil diubah');
 
@@ -100,6 +114,10 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+      $foto_path = $blog->foto;
+      if (Storage::exists($foto_path)) {
+        Storage::delete($foto_path);
+      }
         $blog->delete();
         return redirect()->route('blog')->with('success','Blog berhasil dihapus');
     }

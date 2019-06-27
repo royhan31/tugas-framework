@@ -7,13 +7,13 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Tambah Blog</h5>
-          {!! Form::open(array('route' =>['blog.update',$blog],'method'=>'PUT')) !!}
+          {!! Form::open(array('route' =>['blog.update',$blog],'method'=>'PUT', 'enctype' => 'multipart/form-data')) !!}
           <div class="form-group">
               {!! Form::label('judul', 'Judul', ['class' => 'control-label col-md-3']) !!}
               <div class="col-md-12">
-                  {!! Form::text('judul', old('judul', $blog->judul), ['class' => 'form-control' . ( $errors->has('title') ? ' is-invalid' : '' ),
+                  {!! Form::text('judul', old('judul', $blog->judul), ['class' => 'form-control' . ( $errors->has('judul') ? ' is-invalid' : '' ),
                    'placeholder' => 'Masuakan Judul', 'autofocus', 'required']) !!}
-                   @error('title')
+                   @error('judul')
                        <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
                        </span>
@@ -21,26 +21,11 @@
               </div>
           </div>
           <div class="form-group">
-            {!! Form::label('Kategori', 'Kategori', ['class' => 'control-label col-md-3']) !!}
-            <div class="col-md-12">
-              {{Form::select('kategori',
-              ['Teknologi' => 'Tekonologi',
-               'Hiburan' => 'Hiburan',
-               'Pendidikan' => 'Pendidikan'
-               ], $blog->kategori,
-             [
-                "class" => "form-control",
-                "placeholder" => "Pilih Kategori",'required', old('category') == 'Teknologi' ? 'selected' : '',
-             ])
-            }}
-            </div>
-          </div>
-          <div class="form-group">
-              {!! Form::label('Deskripsi', 'Deskripsi', ['class' => 'control-label col-md-3']) !!}
+              {!! Form::label('Isi_berita', 'Isi_berita', ['class' => 'control-label col-md-3']) !!}
               <div class="col-md-12">
-                  {!! Form::textarea('deskripsi',old('deskripsi', $blog->deskripsi),
+                  {!! Form::textarea('isi_berita',old('isi_berita', $blog->isi_berita),
                   ['class' => 'form-control' . ( $errors->has('description') ? ' is-invalid' : '' ),
-                   'placeholder' => 'Masuakan Judul']) !!}
+                   'placeholder' => 'Masuakan Isi Berita']) !!}
                    @error('description')
                        <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
@@ -48,9 +33,21 @@
                    @enderror
               </div>
           </div>
+
+          <div class="form-group">
+            {!! Form::label('Foto Sebelumnya', 'Foto Sebelumnya', ['class' => 'control-label col-md-3']) !!}
+            <div class="col-md-4 mb-4">
+                <img src="{{asset('public/images/'.$blog->foto)}}" width="100%" height="100%" alt="">
+            </div>
+            {!! Form::label('Foto', 'Foto', ['class' => 'control-label col-md-3']) !!}
+            <div class="col-md-12">
+              {!!Form::file("foto",[ "class" => "form-group"])!!}
+            </div>
+          </div>
           <div class="form-group">
               <div class="col-md-3">
                   {{ Form::submit('Simpan',['class' => 'btn btn-primary'])}}
+                  <button type="button" onclick="window.location='{{route("blog")}}'" class="btn btn-secondary">Kembali</button>
               </div>
           </div>
 
