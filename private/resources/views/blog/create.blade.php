@@ -15,7 +15,7 @@
                    'placeholder' => 'Masuakan Judul', old('judul'), 'autofocus', 'required']) !!}
                    @error('judul')
                        <span class="invalid-feedback" role="alert">
-                           <strong>{{ $message }}</strong>
+                           <strong>judul minimal 5 karakter dan maksimal 50 karakter</strong>
                        </span>
                    @enderror
               </div>
@@ -27,7 +27,7 @@
                    'placeholder' => 'Masuakan Judul', 'required']) !!}
                    @error('isi_berita')
                        <span class="invalid-feedback" role="alert">
-                           <strong>{{ $message }}</strong>
+                           <strong>Isi Berita minimal 10 karakter</strong>
                        </span>
                    @enderror
               </div>
@@ -35,7 +35,12 @@
           <div class="form-group">
             {!! Form::label('Foto', 'Foto', ['class' => 'control-label col-md-3']) !!}
             <div class="col-md-12">
-              {!!Form::file("foto",[ "class" => "form-group", 'required' ])!!}
+              {!!Form::file('foto',[ 'class' => 'form-control '. ( $errors->has('foto') ? ' is-invalid' : '' ), 'required' ])!!}
+              @error('foto')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>Foto harus jpg,jpeg dan png</strong>
+                  </span>
+              @enderror
             </div>
           </div>
           <div class="form-group">

@@ -14,7 +14,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderBy('id')->get();
+        $blogs = Blog::orderBy('id','DESC')->get();
         return view('blog.index', compact('blogs'));
     }
 
@@ -37,8 +37,9 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-          'judul' => 'min:5',
-          'isi_berita' => 'min:10'
+          'judul' => 'min:5|max:50',
+          'isi_berita' => 'min:10',
+          'foto' => 'image|mimes:jpeg,jpg,png'
         ]);
         $foto = $request->file('foto')->store('blog');
 
@@ -82,6 +83,12 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+      $this->validate($request,[
+        'judul' => 'min:5|max:50',
+        'isi_berita' => 'min:10',
+        'foto' => 'image|mimes:jpeg,jpg,png'
+      ]);
+      
       if ($request->foto) {
         $foto_path = $blog->foto;
         if (Storage::exists($foto_path)) {

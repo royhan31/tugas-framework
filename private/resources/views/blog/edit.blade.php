@@ -15,7 +15,7 @@
                    'placeholder' => 'Masuakan Judul', 'autofocus', 'required']) !!}
                    @error('judul')
                        <span class="invalid-feedback" role="alert">
-                           <strong>{{ $message }}</strong>
+                           <strong>judul minimal 5 karakter dan maksimal 50 karakter</strong>
                        </span>
                    @enderror
               </div>
@@ -26,9 +26,9 @@
                   {!! Form::textarea('isi_berita',old('isi_berita', $blog->isi_berita),
                   ['class' => 'form-control' . ( $errors->has('description') ? ' is-invalid' : '' ),
                    'placeholder' => 'Masuakan Isi Berita']) !!}
-                   @error('description')
+                   @error('isi_berita')
                        <span class="invalid-feedback" role="alert">
-                           <strong>{{ $message }}</strong>
+                           <strong>Isi Berita minimal 10 karakter</strong>
                        </span>
                    @enderror
               </div>
@@ -41,7 +41,12 @@
             </div>
             {!! Form::label('Foto', 'Foto', ['class' => 'control-label col-md-3']) !!}
             <div class="col-md-12">
-              {!!Form::file("foto",[ "class" => "form-group"])!!}
+              {!!Form::file('foto',[ 'class' => 'form-control '. ( $errors->has('foto') ? ' is-invalid' : '' ) ])!!}
+              @error('foto')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>Foto harus jpg,jpeg dan png</strong>
+                  </span>
+              @enderror
             </div>
           </div>
           <div class="form-group">
