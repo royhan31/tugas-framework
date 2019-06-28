@@ -52,7 +52,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button> -->
-        {{ Form::submit('Simpan',['class' => 'btn btn-secondary','data-dismiss' => 'modal'])}}
+        {{ Form::submit('Batal',['class' => 'btn btn-secondary','data-dismiss' => 'modal'])}}
         {{ Form::submit('Hapus',['class' => 'btn btn-danger'])}}
       </div>
       {{ Form::close()}}

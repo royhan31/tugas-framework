@@ -25,3 +25,13 @@ Route::group(['prefix' => 'blog'], function(){
   Route::put('/edit/{blog}','BlogController@update')->name('blog.update');
   Route::delete('/hapus/{blog}','BlogController@destroy')->name('blog.delete');
 });
+
+Route::group(['prefix' => 'user'], function(){
+  Route::get('/','UserController@index')->name('user');
+  Route::get('/tambah','UserController@create')->name('user.create');
+  Route::post('/tambah','UserController@store')->name('user.store');
+  Route::get('/tampil/{user}','UserController@show')->name('user.show');
+  Route::get('/edit/{user}','UserController@edit')->name('user.edit');
+  Route::put('/edit/{user}','UserController@update')->name('user.update');
+  Route::delete('/hapus/{user}','UserController@destroy')->name('user.delete');
+});

@@ -6,7 +6,7 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tambah Blog</h5>
+          <h5 class="card-title">Edit Blog</h5>
           {!! Form::open(array('route' =>['blog.update',$blog],'method'=>'PUT', 'enctype' => 'multipart/form-data')) !!}
           <div class="form-group">
               {!! Form::label('judul', 'Judul', ['class' => 'control-label col-md-3']) !!}
@@ -21,7 +21,7 @@
               </div>
           </div>
           <div class="form-group">
-              {!! Form::label('Isi_berita', 'Isi_berita', ['class' => 'control-label col-md-3']) !!}
+              {!! Form::label('Isi Berita', 'Isi Berita', ['class' => 'control-label col-md-3']) !!}
               <div class="col-md-12">
                   {!! Form::textarea('isi_berita',old('isi_berita', $blog->isi_berita),
                   ['class' => 'form-control' . ( $errors->has('description') ? ' is-invalid' : '' ),
