@@ -37,8 +37,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Karyawan</a>
+                        <li class="nav-item @if(Request::is('karyawan') || Request::is('karyawan/tambahkaryawan') || Request::is('karyawan/editkaryawan/*') )
+                        active
+                        @endif
+                        ">
+                            <a class="nav-link" href="{{url('karyawan')}}">Karyawan</a>
                         </li>
 
                         <li class="nav-item">
