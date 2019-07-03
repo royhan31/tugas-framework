@@ -44,7 +44,9 @@
                             <a class="nav-link" href="{{url('karyawan')}}">Karyawan</a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item @if(Request::is('user') || Request::is('user/tambah') || Request::is('user/edit/*') )
+                        active
+                        @endif">
                             <a class="nav-link" href="{{route('user')}}">User</a>
                         </li>
                         <li class="nav-item
