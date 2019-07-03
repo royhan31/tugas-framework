@@ -70,7 +70,7 @@
 
                         <a href="">Karyawan</a>
 
-                        <a href="">User</a>
+                        <a href="{{route('user')}}">User</a>
 
                         <a href="{{route('blog')}}">Blog</a>
                 </div>
