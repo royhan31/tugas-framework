@@ -68,7 +68,7 @@
 
                 <div class="top-right links">
 
-                        <a href="">Karyawan</a>
+                        <a href="{{route('SemuaKaryawan')}}">Karyawan</a>
 
                         <a href="{{route('user')}}">User</a>
 
